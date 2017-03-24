@@ -1,0 +1,84 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:footerbar="sap.ushell.ui.footerbar" controllerName="com.slb.cus.controller.Detail">
+	<Page id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+		<content><ObjectHeader id="objectHeader" title="Sales Order : {Vbeln}" number="{ path: 'Netwr', formatter: '.formatter.currencyValue' }" numberUnit="{Waerk}">
+			<statuses>
+			    <ObjectStatus id="__status131"/>
+			</statuses>
+		
+			</ObjectHeader>
+		    <sap.ui.layout:Grid xmlns:sap.ui.layout="sap.ui.layout" id="__grid1" position="Center" vSpacing="10" width="96%">
+		    <sap.ui.layout:content>
+		        <Label text="Sales Org : M-I L.L.C." width="100%" id="__label25"/>
+		        <Label text="Sub Segment : MDS" width="100%" id="__label24"/>
+		        <Label text="Rig : 62000005" width="100%" id="__label26"/>
+		        <Label text="Dist Ch: Customer Sales" width="100%" id="__label1"/>
+		        <Label text="Created on : 03/01/2017" width="100%" id="__label2"/>
+		        <Label text="Well: 2342987342" width="100%" id="__label7"/>
+		        <Label text="Divsion : SLB Division" width="100%" id="__label6"/>
+		        <Label text="Created By : 23324234" width="100%" id="__label0"/>
+		        <Label text="Field : 234234234" width="100%" id="__label8"/>
+		        <Label text="Area : NAL" width="100%" id="__label4"/>
+		        <Label text="Order Status : Open" width="100%" id="__label3"/>
+		        <Label text="Credit Status : A (Okay)" width="100%" id="__label5"/>
+		        <Label text="Geo : USL" width="100%" id="__label10"/>
+		        <Label text="Order Type : Manual" width="100%" id="__label9"/>
+		        <Label text="Contract ID : 334534" width="100%" id="__label11"/>
+		        <Label text="Sub Geo : USSE" width="100%" id="__label12"/>
+		        <Label text="Sold To Party : 2342342" width="100%" id="__label14"/>
+		        <Label text="Discount : 234" width="100%" id="__label13"/>
+		        <Label text="Segment : M-I" width="100%" id="__label16"/>
+		        <Label text="PO Number : Test -DCD" width="100%" id="__label15"/>
+		    </sap.ui.layout:content>
+		    </sap.ui.layout:Grid>
+			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>detailIconTabBarInfo}"/>
+					<IconTabFilter id="iconTabBarFilter2" icon="sap-icon://attachment" tooltip="{i18n>detailIconTabBarAttachments}"/>
+				</items>
+			</IconTabBar>
+			<Table id="lineItemsList" width="auto" items="{HeaderToItem}" updateFinished="onListUpdateFinished" noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+				<headerToolbar>
+					<Toolbar id="lineItemsToolbar">
+						<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn}"/>
+					</Column>
+					<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
+						<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<ObjectIdentifier title="{Matnr}" text="{Vbeln}"/>
+							<ObjectNumber unit="{Matnr}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<footer>
+			<OverflowToolbar id="footerToolbar">
+				<ToolbarSpacer/>
+				<Button text="Accept" width="100px" id="__button0" type="Accept"/>
+				<!--<Button id="shareButton" tooltip="{i18n>shareTooltip}" icon="sap-icon://action" press="onSharePress">-->
+				<!--	<dependents>-->
+				<!--		<ActionSheet id="shareSheet" showCancelButton="true" placement="Top">-->
+				<!--			<buttons>-->
+				<!--				<Button id="shareEmail" icon="sap-icon://email" text="{i18n>shareSendEmail}" press="onShareEmailPress"/>-->
+				<!--				<Button id="shareInJam" icon="sap-icon://jam" text="{i18n>shareOnJamTitle}" press="onShareInJamPress" visible="{FLP>/isShareInJamActive}"/>-->
+				<!--				<footerbar:AddBookmarkButton id="shareTile" appData="{ path: 'detailView>/saveAsTileTitle', formatter: '.formatter.shareTileData' }"/>-->
+				<!--			</buttons>-->
+				<!--		</ActionSheet>-->
+				<!--	</dependents>-->
+				<!--</Button>-->
+			<content>
+			    <Button text="Reject" width="100px" id="__button1" type="Reject"/>
+			</content>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

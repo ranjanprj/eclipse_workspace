@@ -1,0 +1,121 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" Version="1.0">
+    <edmx:DataServices
+        xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="1.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="flight-persistence">
+            <EntityType Name="SLBOrganization">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Area" Type="Edm.String"/>
+                <Property Name="Geo" Type="Edm.String"/>
+                <Property Name="Id" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="Segment" Type="Edm.String"/>
+                <Property Name="SubGeo" Type="Edm.String"/>
+                <Property Name="SubSegment" Type="Edm.String"/>
+                <NavigationProperty Name="SalesOrderDetails" Relationship="flight-persistence.SalesOrder_SLBOrganization" FromRole="SLBOrganization" ToRole="SalesOrder"/>
+            </EntityType>
+            <EntityType Name="SalesOrder">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Address" Type="Edm.String"/>
+                <Property Name="BillT" Type="Edm.String"/>
+                <Property Name="BlCat" Type="Edm.String"/>
+                <Property Name="Counter" Type="Edm.String"/>
+                <Property Name="Curr" Type="Edm.String"/>
+                <Property Name="DChl" Type="Edm.String"/>
+                <Property Name="DocCa" Type="Edm.String"/>
+                <Property Name="Document" Type="Edm.String"/>
+                <Property Name="DstC" Type="Edm.String"/>
+                <Property Name="Dv" Type="Edm.String"/>
+                <Property Name="NET" Type="Edm.String"/>
+                <Property Name="NameOfSoldToParty" Type="Edm.String"/>
+                <Property Name="PODSTATUS" Type="Edm.String"/>
+                <Property Name="S" Type="Edm.String"/>
+                <Property Name="SAPContractNo" Type="Edm.String"/>
+                <Property Name="SLBWellNumber" Type="Edm.String"/>
+                <Property Name="ShPt" Type="Edm.String"/>
+                <Property Name="SoldToLoc" Type="Edm.String"/>
+                <Property Name="Approver" Type="Edm.String"/>
+                <Property Name="BillingDate" Type="Edm.DateTime"/>
+                <Property Name="ClientContractNo" Type="Edm.String"/>
+                <Property Name="Id" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="Material" Type="Edm.String"/>
+                <Property Name="OrderType" Type="Edm.String"/>
+                <Property Name="Project" Type="Edm.String"/>
+                <Property Name="SalesOrderDate" Type="Edm.DateTime"/>
+                <Property Name="SalesOrderNumber" Type="Edm.String"/>
+                <Property Name="SoldToParty" Type="Edm.String"/>
+                <Property Name="SourceOrderNo" Type="Edm.String"/>
+                <NavigationProperty Name="SalesOrderDetailDetails" Relationship="flight-persistence.SalesOrder_SalesOrderDetail" FromRole="SalesOrder" ToRole="SalesOrderDetail"/>
+            </EntityType>
+            <EntityType Name="OrganizationData">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="DistributionChannel" Type="Edm.String"/>
+                <Property Name="Division" Type="Edm.String"/>
+                <Property Name="Id" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="SalesOrganization" Type="Edm.String"/>
+                <NavigationProperty Name="SalesOrderDetails" Relationship="flight-persistence.OrganizationData_SalesOrder" FromRole="OrganizationData" ToRole="SalesOrder"/>
+            </EntityType>
+            <EntityType Name="SalesOrderDetail">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="AcceptanceDate" Type="Edm.DateTime"/>
+                <Property Name="BillingBlock" Type="Edm.String"/>
+                <Property Name="ContractEndDate" Type="Edm.DateTime"/>
+                <Property Name="ContractStartDate" Type="Edm.DateTime"/>
+                <Property Name="DeliveryBlock" Type="Edm.String"/>
+                <Property Name="Id" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="InitialApprover" Type="Edm.String"/>
+                <Property Name="NetValue" Type="Edm.Int32"/>
+                <Property Name="OperationalApprover" Type="Edm.String"/>
+                <Property Name="SalesDocType" Type="Edm.String"/>
+                <Property Name="SalesOrderStatus" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="SalesOrderStatus">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="Status" Type="Edm.String"/>
+                <Property Name="Text" Type="Edm.String"/>
+            </EntityType>
+            <Association Name="SalesOrder_SLBOrganization">
+                <End Type="flight-persistence.SLBOrganization" Multiplicity="1" Role="SLBOrganization"/>
+                <End Type="flight-persistence.SalesOrder" Multiplicity="*" Role="SalesOrder"/>
+            </Association>
+            <Association Name="SalesOrder_SalesOrderDetail">
+                <End Type="flight-persistence.SalesOrder" Multiplicity="1" Role="SalesOrder"/>
+                <End Type="flight-persistence.SalesOrderDetail" Multiplicity="1" Role="SalesOrderDetail"/>
+            </Association>
+            <Association Name="OrganizationData_SalesOrder">
+                <End Type="flight-persistence.OrganizationData" Multiplicity="1" Role="OrganizationData"/>
+                <End Type="flight-persistence.SalesOrder" Multiplicity="*" Role="SalesOrder"/>
+            </Association>
+            <EntityContainer Name="flight-persistenceContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="SLBOrganizations" EntityType="flight-persistence.SLBOrganization"/>
+                <EntitySet Name="SalesOrders" EntityType="flight-persistence.SalesOrder"/>
+                <EntitySet Name="OrganizationDatas" EntityType="flight-persistence.OrganizationData"/>
+                <EntitySet Name="SalesOrderDetails" EntityType="flight-persistence.SalesOrderDetail"/>
+                <EntitySet Name="SalesOrderStatuss" EntityType="flight-persistence.SalesOrderStatus"/>
+                <AssociationSet Name="SalesOrder_SLBOrganizationSet" Association="flight-persistence.SalesOrder_SLBOrganization">
+                    <End EntitySet="SLBOrganizations" Role="SLBOrganization"/>
+                    <End EntitySet="SalesOrders" Role="SalesOrder"/>
+                </AssociationSet>
+                <AssociationSet Name="SalesOrder_SalesOrderDetailSet" Association="flight-persistence.SalesOrder_SalesOrderDetail">
+                    <End EntitySet="SalesOrders" Role="SalesOrder"/>
+                    <End EntitySet="SalesOrderDetails" Role="SalesOrderDetail"/>
+                </AssociationSet>
+                <AssociationSet Name="OrganizationData_SalesOrderSet" Association="flight-persistence.OrganizationData_SalesOrder">
+                    <End EntitySet="OrganizationDatas" Role="OrganizationData"/>
+                    <End EntitySet="SalesOrders" Role="SalesOrder"/>
+                </AssociationSet>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

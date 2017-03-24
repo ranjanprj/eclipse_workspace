@@ -1,0 +1,22 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+		controllerName="com.slb.cus.controller.Master" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Master Title">
+		<content>
+			<List id="list" items="{ path: '/Products', sorter: { path: 'ID', descending: false }, groupHeaderFactory: '.createGroupHeader' }"
+				busyIndicatorDelay="{masterView>/delay}" noDataText="{masterView>/noDataText}"
+				mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" growing="true" growingThreshold="10" growingScrollToLoad="true"
+				updateFinished="onUpdateFinished" selectionChange="onSelectionChange">
+				
+				<items>
+					<ObjectListItem
+						title="{Name}"
+						number="{ path: 'ID', formatter: '.formatter.currencyValue' }" 
+						numberUnit="{ID}" 
+						type="Navigation"
+						press="onPress">
+					</ObjectListItem>
+				</items>
+			</List>
+		</content>
+	</Page>
+</core:View>

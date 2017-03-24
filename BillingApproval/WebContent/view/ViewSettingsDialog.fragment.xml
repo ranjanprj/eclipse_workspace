@@ -1,0 +1,56 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<ViewSettingsDialog id="viewInitialFilterDialog" confirm="onConfirmViewSettingsDialog" resetFilters="onViewSettingsDialogResetFilters">
+		<filterItems>
+			<ViewSettingsFilterItem id="initialFilterSalesOrgFilter" text="{i18n>initialFilterSalesOrg}" key="SALES_ORG_KEY" multiSelect="true" items="{/SalesOrderHeaderSet}">
+				<items>
+					<ViewSettingsItem text="{Vkorg}" key="{Vkorg}" />
+				</items>
+			</ViewSettingsFilterItem>
+			
+			<ViewSettingsFilterItem id="initialFilterDistributionChannel" text="{i18n>initialFilterDistributionChannel}" key="DIST_CHANNEL_KEY" multiSelect="true" items="{/SalesOrderHeaderSet}">
+				<items>
+					<ViewSettingsItem text="{Vtweg}" key="{Vtweg}" />
+				</items>
+			</ViewSettingsFilterItem>
+			
+			<ViewSettingsFilterItem id="initialFilterDivision" text="{i18n>initialFilterDivision}" key="DIV_KEY" multiSelect="true" items="{/SalesOrderHeaderSet}">
+				<items>
+					<ViewSettingsItem text="{Spart}" key="{Spart}" />
+				</items>
+			</ViewSettingsFilterItem>
+			
+			<ViewSettingsFilterItem id="initialFilterDocument" text="{i18n>initialFilterDocument}" key="DOC_TYPE_KEY" multiSelect="true" items="{/DocTypeSet}">
+				<items>
+					<ViewSettingsItem text="{DocTypeId}" key="{DocTypeId}" />
+				</items>
+			</ViewSettingsFilterItem>
+			
+			<ViewSettingsFilterItem id="initialFilterJobProject" text="{i18n>initialFilterJobProject}" key="JOB_PRJ_KEY" multiSelect="true" items="{/JobIdSet}">
+				<items>
+					<ViewSettingsItem text="{Job}" key="{Job}" />
+				</items>
+			</ViewSettingsFilterItem>
+			
+			<ViewSettingsFilterItem id="initialFilterCustomer" text="{i18n>initialFilterCustomer}" key="CUST_SOLD_TO_KEY" multiSelect="true" items="{/CustomerSet}">
+				<items>
+					<ViewSettingsItem text="{CustomerId}" key="{CustomerId}" />
+				</items>
+			</ViewSettingsFilterItem>
+				<ViewSettingsFilterItem id="masterFilterWell" text="{i18n>masterFilterWell}" key="WELL_KEY" multiSelect="false">
+			
+			</ViewSettingsFilterItem>
+		
+			<ViewSettingsFilterItem id="masterFilterRig" text="{i18n>masterFilterRig}" key="RIG_KEY" multiSelect="false">
+			
+			</ViewSettingsFilterItem>
+			
+			<ViewSettingsFilterItem id="masterFilterSegment" text="{i18n>masterFilterSegment}" key="PRICE_KEY" multiSelect="false">
+			
+			</ViewSettingsFilterItem>
+			
+			<ViewSettingsFilterItem id="masterFilterSubSegment" text="{i18n>masterFilterSubSegment}" key="SUB_SEG_KEY" multiSelect="false">
+			
+			</ViewSettingsFilterItem>
+		</filterItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

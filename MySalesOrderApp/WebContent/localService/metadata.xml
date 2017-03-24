@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0"
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZCUS_TEST_SALES_ORDER_SRV" xml:lang="en" sap:schema-version="1"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="SalesOrderHeader" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                </Key>
+                <Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Sales Document" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ernam" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Created by" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vbtyp" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Document cat." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Trvog" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Transact.group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Auart" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Sales Doc. Type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Augru" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Order reason" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Submi" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Collective no." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lifsk" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Delivery block" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Faksk" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Billing block" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Netwr" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="3" sap:unit="Waerk" sap:label="Net value" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Waerk" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="Doc. Currency" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="Vkorg" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Sales Org." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vtweg" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Distr. Channel" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Spart" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Division" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vkgrp" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Sales Group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vkbur" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Sales Office" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Gsber" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Business Area" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Gskst" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Business area" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="HeaderToItem" Relationship="ZCUS_TEST_SALES_ORDER_SRV.SalesOrderHeaderToSalesOrderItem" FromRole="FromRole_SalesOrderHeaderToSalesOrderItem" ToRole="ToRole_SalesOrderHeaderToSalesOrderItem"/>
+                <NavigationProperty Name="order_num" Relationship="ZCUS_TEST_SALES_ORDER_SRV.test" FromRole="FromRole_test" ToRole="ToRole_test"/>
+            </EntityType>
+            <EntityType Name="SalesOrderItem" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Vbeln"/>
+                    <PropertyRef Name="Posnr"/>
+                </Key>
+                <Property Name="Mandt" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vbeln" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Sales Document" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Posnr" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Item" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Matnr" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="Material" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Matwa" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="MaterialEntered" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Pmatn" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="Pr. Ref. Matl" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Charg" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Batch" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Matkl" Type="Edm.String" Nullable="false" MaxLength="9" sap:label="Material Group" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Arktx" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Description" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Pstyv" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Item category" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Posar" Type="Edm.String" Nullable="false" MaxLength="1" sap:label="Item type" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="test" sap:content-version="1">
+                <End Type="ZCUS_TEST_SALES_ORDER_SRV.SalesOrderHeader" Multiplicity="1" Role="FromRole_test"/>
+                <End Type="ZCUS_TEST_SALES_ORDER_SRV.SalesOrderItem" Multiplicity="*" Role="ToRole_test"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_test">
+                        <PropertyRef Name="Vbeln"/>
+                    </Principal>
+                    <Dependent Role="ToRole_test">
+                        <PropertyRef Name="Vbeln"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="SalesOrderHeaderToSalesOrderItem" sap:content-version="1">
+                <End Type="ZCUS_TEST_SALES_ORDER_SRV.SalesOrderHeader" Multiplicity="1" Role="FromRole_SalesOrderHeaderToSalesOrderItem"/>
+                <End Type="ZCUS_TEST_SALES_ORDER_SRV.SalesOrderItem" Multiplicity="*" Role="ToRole_SalesOrderHeaderToSalesOrderItem"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_SalesOrderHeaderToSalesOrderItem">
+                        <PropertyRef Name="Vbeln"/>
+                    </Principal>
+                    <Dependent Role="ToRole_SalesOrderHeaderToSalesOrderItem">
+                        <PropertyRef Name="Vbeln"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZCUS_TEST_SALES_ORDER_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="SalesOrderHeaderSet" EntityType="ZCUS_TEST_SALES_ORDER_SRV.SalesOrderHeader" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="SalesOrderItemSet" EntityType="ZCUS_TEST_SALES_ORDER_SRV.SalesOrderItem" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="SalesOrderHeaderToSalesOrderItemSet" Association="ZCUS_TEST_SALES_ORDER_SRV.SalesOrderHeaderToSalesOrderItem" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SalesOrderHeaderSet" Role="FromRole_SalesOrderHeaderToSalesOrderItem"/>
+                    <End EntitySet="SalesOrderItemSet" Role="ToRole_SalesOrderHeaderToSalesOrderItem"/>
+                </AssociationSet>
+                <AssociationSet Name="testSet" Association="ZCUS_TEST_SALES_ORDER_SRV.test" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="SalesOrderHeaderSet" Role="FromRole_test"/>
+                    <End EntitySet="SalesOrderItemSet" Role="ToRole_test"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="https://sapf2d.dir.slb.com:44310/sap/opu/odata/SAP/ZCUS_TEST_SALES_ORDER_SRV/$metadata"
+                xmlns:atom="http://www.w3.org/2005/Atom"/>
+                <atom:link rel="latest-version" href="https://sapf2d.dir.slb.com:44310/sap/opu/odata/SAP/ZCUS_TEST_SALES_ORDER_SRV/$metadata"
+                    xmlns:atom="http://www.w3.org/2005/Atom"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<edmx:Edmx Version="1.0"
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:DataServices m:DataServiceVersion="1.0"
+        xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+        <Schema Namespace="salesorder-persistence"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="SalesOrderHeader">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="SalesOrderDate" Type="Edm.DateTime"/>
+                <Property Name="SalesOrderNumber" Type="Edm.String"/>
+                <Property Name="SalesOrderTotal" Type="Edm.Double"/>
+                <NavigationProperty Name="SalesOrderHeaderItemDetails" Relationship="salesorder-persistence.SalesOrderHeader_SalesOrderHeaderItem" FromRole="SalesOrderHeader" ToRole="SalesOrderHeaderItem"/>
+            </EntityType>
+            <EntityType Name="SalesOrderHeaderItem">
+                <Key>
+                    <PropertyRef Name="Id"/>
+                </Key>
+                <Property Name="Id" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="ItemCost" Type="Edm.Double"/>
+                <Property Name="ItemName" Type="Edm.String"/>
+                <Property Name="ItemNumber" Type="Edm.String"/>
+                <Property Name="ItemQuantity" Type="Edm.String"/>
+                <Property Name="ItemUOM" Type="Edm.String"/>
+            </EntityType>
+            <Association Name="SalesOrderHeader_SalesOrderHeaderItem">
+                <End Type="salesorder-persistence.SalesOrderHeader" Multiplicity="1" Role="SalesOrderHeader"/>
+                <End Type="salesorder-persistence.SalesOrderHeaderItem" Multiplicity="*" Role="SalesOrderHeaderItem"/>
+            </Association>
+            <EntityContainer Name="salesorder-persistenceContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="SalesOrderHeaders" EntityType="salesorder-persistence.SalesOrderHeader"/>
+                <EntitySet Name="SalesOrderHeaderItems" EntityType="salesorder-persistence.SalesOrderHeaderItem"/>
+                <AssociationSet Name="SalesOrderHeader_SalesOrderHeaderItemSet" Association="salesorder-persistence.SalesOrderHeader_SalesOrderHeaderItem">
+                    <End EntitySet="SalesOrderHeaders" Role="SalesOrderHeader"/>
+                    <End EntitySet="SalesOrderHeaderItems" Role="SalesOrderHeaderItem"/>
+                </AssociationSet>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

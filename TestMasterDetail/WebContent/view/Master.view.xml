@@ -1,0 +1,38 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+		controllerName="com.slb.cus.controller.Master" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Master Title">
+		<subHeader>
+			<Bar id="headerBar">
+				<contentMiddle>
+					<SearchField id="searchField" showRefreshButton="{= !${device>/support/touch} }" tooltip="{i18n>masterSearchTooltip}" width="100%"
+						search="onSearch"></SearchField>
+				</contentMiddle>
+			</Bar>
+		</subHeader>
+		
+		<content>
+		
+		
+			<List id="list" items="{ path: '/SalesOrderHeaderSet', sorter: { path: 'Vbeln', descending: false }, groupHeaderFactory: '.createGroupHeader' }"
+				busyIndicatorDelay="{masterView>/delay}" noDataText="{masterView>/noDataText}"
+				mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" growing="true" growingThreshold="10" growingScrollToLoad="true"
+				updateFinished="onUpdateFinished" selectionChange="onSelectionChange">
+				
+				<items>
+					<ObjectListItem
+						title="{Name}"
+						number="{ path: 'Vbeln', formatter: '.formatter.currencyValue' }" 
+						numberUnit="{Vbeln}" 
+						type="Navigation"
+						press="onPress">
+					</ObjectListItem>
+				</items>
+			</List>
+		</content>
+		
+		
+	</Page>
+</core:View>
+
+
+

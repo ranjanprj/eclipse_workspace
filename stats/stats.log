@@ -1,0 +1,75 @@
+INFO:root:INTER QUARTILE LIST [5, 7, 2, 1, 3, 4, 8, 8, 6, 6]
+INFO:root:SORTED LIST [1, 2, 3, 4, 5, 6, 6, 7, 8, 8]
+INFO:root:INTER QUARTILE SPLIT LIST [[1, 2, 3, 4, 5], [6, 6, 7, 8, 8]]
+INFO:root:MEAN 6.0
+INFO:root:VARIANCE 8.4
+INFO:root:INTER QUARTILE LIST [5, 7, 2, 1, 3, 4, 8, 8, 6, 6]
+INFO:root:SORTED LIST [1, 2, 3, 4, 5, 6, 6, 7, 8, 8]
+INFO:root:INTER QUARTILE SPLIT LIST [[1, 2, 3, 4, 5], [6, 6, 7, 8, 8]]
+INFO:root:MEAN 6.0
+INFO:root:VARIANCE 8.4
+INFO:root:INTER QUARTILE LIST [5, 7, 2, 1, 3, 4, 8, 8, 6, 6]
+INFO:root:SORTED LIST [1, 2, 3, 4, 5, 6, 6, 7, 8, 8]
+INFO:root:INTER QUARTILE SPLIT LIST [[1, 2, 3, 4, 5], [6, 6, 7, 8, 8]]
+INFO:root:MEAN 6.0
+INFO:root:VARIANCE 8.4
+INFO:root:INTER QUARTILE LIST [5, 7, 2, 1, 3, 4, 8, 8, 6, 6]
+INFO:root:SORTED LIST [1, 2, 3, 4, 5, 6, 6, 7, 8, 8]
+INFO:root:INTER QUARTILE SPLIT LIST [[1, 2, 3, 4, 5], [6, 6, 7, 8, 8]]
+INFO:root:MEAN 6.0
+INFO:root:VARIANCE 8.4
+INFO:root:INTER QUARTILE LIST [5, 7, 2, 1, 3, 4, 8, 8, 6, 6]
+INFO:root:SORTED LIST [1, 2, 3, 4, 5, 6, 6, 7, 8, 8]
+INFO:root:INTER QUARTILE SPLIT LIST [[1, 2, 3, 4, 5], [6, 6, 7, 8, 8]]
+INFO:root:MEAN 6.0
+INFO:root:VARIANCE 8.4
+INFO:root:INTER QUARTILE LIST [5, 7, 2, 1, 3, 4, 8, 8, 6, 6]
+INFO:root:SORTED LIST [1, 2, 3, 4, 5, 6, 6, 7, 8, 8]
+INFO:root:INTER QUARTILE SPLIT LIST [[1, 2, 3, 4, 5], [6, 6, 7, 8, 8]]
+INFO:root:MEAN 6.0
+INFO:root:VARIANCE 8.4
+INFO:root:INTER QUARTILE LIST [5, 7, 2, 1, 3, 4, 8, 8, 6, 6]
+INFO:root:SORTED LIST [1, 2, 3, 4, 5, 6, 6, 7, 8, 8]
+INFO:root:INTER QUARTILE SPLIT LIST [[1, 2, 3, 4, 5], [6, 6, 7, 8, 8]]
+INFO:root:MEAN 6.0
+INFO:root:VARIANCE 8.4
+INFO:root:INTER QUARTILE LIST [5, 7, 2, 1, 3, 4, 8, 8, 6, 6]
+INFO:root:SORTED LIST [1, 2, 3, 4, 5, 6, 6, 7, 8, 8]
+INFO:root:INTER QUARTILE SPLIT LIST [[1, 2, 3, 4, 5], [6, 6, 7, 8, 8]]
+INFO:root:MEAN 6.0
+INFO:root:VARIANCE 8.4
+INFO:root:INTER QUARTILE LIST [5, 7, 2, 1, 3, 4, 8, 8, 6, 6]
+INFO:root:SORTED LIST [1, 2, 3, 4, 5, 6, 6, 7, 8, 8]
+INFO:root:INTER QUARTILE SPLIT LIST [[1, 2, 3, 4, 5], [6, 6, 7, 8, 8]]
+INFO:root:MEAN 6.0
+INFO:root:VARIANCE 8.4
+INFO:root:INTER QUARTILE LIST [5, 7, 2, 1, 3, 4, 8, 8, 6, 6]
+INFO:root:SORTED LIST [1, 2, 3, 4, 5, 6, 6, 7, 8, 8]
+INFO:root:INTER QUARTILE SPLIT LIST [[1, 2, 3, 4, 5], [6, 6, 7, 8, 8]]
+INFO:root:MEAN 6.0
+INFO:root:VARIANCE 8.4
+INFO:root:INTER QUARTILE LIST [5, 7, 2, 1, 3, 4, 8, 8, 6, 6]
+INFO:root:SORTED LIST [1, 2, 3, 4, 5, 6, 6, 7, 8, 8]
+INFO:root:INTER QUARTILE SPLIT LIST [[1, 2, 3, 4, 5], [6, 6, 7, 8, 8]]
+INFO:root:MEAN 6.0
+INFO:root:VARIANCE 8.4
+INFO:root:INTER QUARTILE LIST [5, 7, 2, 1, 3, 4, 8, 8, 6, 6]
+INFO:root:SORTED LIST [1, 2, 3, 4, 5, 6, 6, 7, 8, 8]
+INFO:root:INTER QUARTILE SPLIT LIST [[1, 2, 3, 4, 5], [6, 6, 7, 8, 8]]
+INFO:root:MEAN 6.0
+INFO:root:VARIANCE 8.4
+INFO:root:INTER QUARTILE LIST [5, 7, 2, 1, 3, 4, 8, 8, 6, 6]
+INFO:root:SORTED LIST [1, 2, 3, 4, 5, 6, 6, 7, 8, 8]
+INFO:root:INTER QUARTILE SPLIT LIST [[1, 2, 3, 4, 5], [6, 6, 7, 8, 8]]
+INFO:root:MEAN 6.0
+INFO:root:VARIANCE 8.4
+INFO:root:INTER QUARTILE LIST [5, 7, 2, 1, 3, 4, 8, 8, 6, 6]
+INFO:root:SORTED LIST [1, 2, 3, 4, 5, 6, 6, 7, 8, 8]
+INFO:root:INTER QUARTILE SPLIT LIST [[1, 2, 3, 4, 5], [6, 6, 7, 8, 8]]
+INFO:root:MEAN 6.0
+INFO:root:VARIANCE 8.4
+INFO:root:INTER QUARTILE LIST [5, 7, 2, 1, 3, 4, 8, 8, 6, 6]
+INFO:root:SORTED LIST [1, 2, 3, 4, 5, 6, 6, 7, 8, 8]
+INFO:root:INTER QUARTILE SPLIT LIST [[1, 2, 3, 4, 5], [6, 6, 7, 8, 8]]
+INFO:root:MEAN 6.0
+INFO:root:VARIANCE 8.4

@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+	<!--
+	src="http://localhost/sapui5_f2d/sap/public/bc/ui5_ui5/1/resources/sap-ui-core.js " 
+				src="https://sapui5.hana.ondemand.com/1.28.4/resources/sap-ui-core.js"
+				https://sapf2d.dir.slb.com:44310/sap/public/bc/ui5_ui5/1/resources/sap-ui-core.js
+	 -->
+		<script id="sap-ui-bootstrap"
+		
+		
+src="https://sapui5.hana.ondemand.com/1.28.4/resources/sap-ui-core.js"
+				data-sap-ui-libs="sap.m, sap.ushell, sap.collaboration"
+				data-sap-ui-theme="sap_bluecrystal"
+				data-sap-ui-compatVersion="edge"
+				data-sap-ui-resourceroots='{"com.slb.cus": "./"}'
+				data-sap-ui-frameOptions='allow'> // NON-SECURE setting for testing environment
+		</script>
+
+		<script>
+			new sap.ui.getCore().attachInit(function() {
+					sap.ui.core.ComponentContainer({
+						name : "com.slb.cus"
+					}).placeAt("content");
+			});
+		</script>
+
+	</head>
+	<body class="sapUiBody" role="application">
+		<div id="content"></div>
+	</body>
+</html>

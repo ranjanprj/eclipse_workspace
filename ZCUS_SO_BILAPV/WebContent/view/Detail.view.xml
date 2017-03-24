@@ -1,0 +1,102 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:footerbar="sap.ushell.ui.footerbar" controllerName="com.slb.cus.billingapproval.controller.Detail">
+	<Page id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}" busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+		<content>
+			<ObjectHeader id="objectHeader" title="{i18n>detailsTitleSalesOrder} : {OrderNo}" number="{ path: 'NetValue', formatter: '.formatter.currencyValue' }" numberUnit="{Currency}"/>
+			<sap.ui.layout:Grid xmlns:sap.ui.layout="sap.ui.layout" id="__grid1" position="Center" vSpacing="10" width="96%">
+				<sap.ui.layout:content>
+					<Label text="{i18n>salesOrg} : {SalesOrg}." width="100%" id="sales_org_label"/>
+					<Label text="{i18n>subSegment} : {SubSegment}" width="100%" id="sub_segment_label"/>
+					<Label text="{i18n>rig} : {RigId}" width="100%" id="rig_segment_label"/>
+					<Label text="{i18n>distChannel} : {DisChannel}" width="100%" id="dist_channel_label"/>
+					<!--<Label text="{i18n>customerSales} : {SoldToParty}" width="100%" id="customer_sales_label"/>-->
+					<Label text="{i18n>createdOn} : {CreatedOn}" width="100%" id="created_on_label"/>
+					<Label text="{i18n>well} : {WellId}" width="100%" id="well_label"/>
+					<Label text="{i18n>division} : {WellId}" width="100%" id="well_division"/>
+					<Label text="{i18n>createdBy} : {CreatedBy}" width="100%" id="created_by_label"/>
+					<Label text="{i18n>field} : {FieldId}" width="100%" id="field_id_label"/>
+					<Label text="{i18n>area} : {SalesArea}" width="100%" id="sales_area_label"/>
+					<Label text="{i18n>orderStatus} : {Status}" width="100%" id="status_label"/>
+					<Label text="{i18n>creditStatus} : {CreditStatus}" width="100%" id="credit_status_label"/>
+					<Label text="{i18n>geo} : {Geo}" width="100%" id="geo_label"/>
+					<Label text="{i18n>subGeo} : {SubGeo}" width="100%" id="sub_geo_label"/>
+					<Label text="{i18n>orderType} : {OrderType}" width="100%" id="order_type_label"/>
+					<Label text="{i18n>contractId} : {ContractId}" width="100%" id="contract_id_label"/>
+					<Label text="{i18n>soldToParty} : {SoldToParty}" width="100%" id="sold_to_party_label"/>
+					<Label text="{i18n>discount} : {Discount}" width="100%" id="discount_label"/>
+					<Label text="{i18n>segment} : {Segment}" width="100%" id="segment_label"/>
+					<Label text="{i18n>poNumber} : {PoNumber}" width="100%" id="po_number_label"/>
+				</sap.ui.layout:content>
+			</sap.ui.layout:Grid>
+			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter showAll="true" count="{detailView>/lineItemListTitle}" text="Items" key="All">
+						<Table id="lineItemsList" width="auto" items="{SalesOrderItemSet}" updateFinished="onListUpdateFinished" noDataText="{i18n>detailLineItemTableNoDataText}" busyIndicatorDelay="{detailView>/lineItemTableDelay}" class="sapUiResponsiveMargin">
+							<!--<headerToolbar>-->
+							<!--	<Toolbar id="lineItemsToolbar">-->
+							<!--		<Title id="lineItemsHeader" text="{detailView>/lineItemListTitle}"/>-->
+							<!--	</Toolbar>-->
+							<!--</headerToolbar>-->
+							<columns>
+								<Column>
+									<Text text="{i18n>itemDescription}"/>
+								</Column>
+								<Column>
+									<Text text="{i18n>itemMaterialNumber}"/>
+								</Column>
+								<Column>
+									<Text text="{i18n>itemPlant}"/>
+								</Column>
+								<Column>
+									<Text text="{i18n>itemQuantity}"/>
+								</Column>
+								<Column>
+									<Text text="{i18n>itemNetPrice}"/>
+								</Column>
+								<!--<Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right">-->
+								<!--	<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>-->
+								<!--</Column>-->
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<ObjectIdentifier title="{MatDesc}"/>
+										<ObjectIdentifier text="{ItemNo}"/>
+										<ObjectIdentifier text="{Plant}"/>
+										<ObjectIdentifier text="{Quantity}"/>
+										<ObjectNumber number="{ parts:[{path:'NetPrice'},{path:'ItemCurr'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }" unit="{ItemCurr}"/> 
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</IconTabFilter>
+					<IconTabSeparator/>
+					
+					<IconTabFilter id="iconTabBarFilter1" icon="sap-icon://hint" tooltip="{i18n>detailIconTabBarInfo}">
+											
+							<Link id="link_va03_app" text="Sales Order Backend Application" target="_blank" emphasized="true"/>
+						
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+		<footer>
+			<OverflowToolbar id="footerToolbar">
+				<ToolbarSpacer/>
+				<Button id="acceptButton" type="Accept" text="{i18n>approveBtnTxt}" press="openApproveDialog"/>
+				<Button id="rejectButton" type="Reject" text="{i18n>rejectBtnTxt}" press="openApproveDialog"/>
+				<!--<Button id="shareButton" tooltip="{i18n>shareTooltip}" icon="sap-icon://action" press="onSharePress">-->
+				<!--	<dependents>-->
+				<!--		<ActionSheet id="shareSheet" showCancelButton="true" placement="Top">-->
+				<!--			<buttons>-->
+				<!--				<Button id="shareEmail" icon="sap-icon://email" text="{i18n>shareSendEmail}" press="onShareEmailPress"/>-->
+				<!--				<Button id="shareInJam" icon="sap-icon://jam" text="{i18n>shareOnJamTitle}" press="onShareInJamPress" visible="{FLP>/isShareInJamActive}"/>-->
+				<!--				<footerbar:AddBookmarkButton id="shareTile" appData="{ path: 'detailView>/saveAsTileTitle', formatter: '.formatter.shareTileData' }"/>-->
+				<!--			</buttons>-->
+				<!--		</ActionSheet>-->
+				<!--	</dependents>-->
+				<!--</Button>-->
+			<content/>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>
