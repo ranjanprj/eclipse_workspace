@@ -4,3 +4,5 @@ RemoteSystemsTempFiles
 Servers
 test
 sfsf_attachment
+yelp/*.db
+yelp/yelp.db

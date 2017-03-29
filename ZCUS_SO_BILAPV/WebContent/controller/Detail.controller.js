@@ -2,7 +2,8 @@
 sap.ui.define([
 	"com/slb/cus/billingapproval/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
-	"com/slb/cus/billingapproval/model/formatter"
+	"com/slb/cus/billingapproval/model/formatter",
+	"sap/m/MessageBox"
 ], function(BaseController, JSONModel, formatter) {
 	"use strict";
 	return BaseController.extend("com.slb.cus.billingapproval.controller.Detail", {
@@ -24,6 +25,7 @@ sap.ui.define([
 			this.getOwnerComponent().oWhenMetadataIsLoaded.then(this._onMetadataLoaded.bind(this));
 		},
 		onAfterRendering: function() {
+
 		},
 		/* =========================================================== */
 		/* event handlers                                              */
@@ -170,9 +172,6 @@ sap.ui.define([
 			var orderNo = this.getView().getBindingContext().getProperty("OrderNo");
 			this._setOrderNo(orderNo);
 
-			this._getSalesOrderUpdateData(orderNo);
-			this._getSalesOrderUpdateUsrStatusData(orderNo);
-
 		},
 		_onMetadataLoaded: function() {
 			// Store original busy indicator delay for the detail view
@@ -196,37 +195,30 @@ sap.ui.define([
 		/**
 		 *@memberOf com.slb.cus.billingapproval.controller.Detail
 		 */
-		onApprove: function() {
 
-			if (!this._oViewSettingsDialog) {
-				this._oViewSettingsDialog = sap.ui.xmlfragment("com.slb.cus.billingapproval.view.BillingApprovalDialog", this);
-				this.getView().addDependent(this._oViewSettingsDialog);
-				// forward compact/cozy style into Dialog
-				this._oViewSettingsDialog.addStyleClass(this.getOwnerComponent().getContentDensityClass());
-			}
-			this._oViewSettingsDialog.open();
-		},
-		
 		openApproveDialog: function(evt) {
+			var orderNo = this.getView().getBindingContext().getProperty("OrderNo");
 			this._oApprovalButton = evt.getSource().getText();
-			
+			// Populate JSON Model
+			this._getSalesOrderUpdateData(orderNo);
+			this._getSalesOrderUpdateUsrStatusData(orderNo);
+
+		},
+
+		_openApprovalDialogAfterRead: function() {
 			var soModel = this.getModel("SalesOrderUpdateModel");
 			var soStatusModel = this.getModel("SalesOrderUpdateUsrStatusModel");
-			
-
 			if (!this._oViewSettingsDialog) {
 				this._oViewSettingsDialog = sap.ui.xmlfragment("com.slb.cus.billingapproval.view.BillingApprovalDialog", this);
 				this.getView().addDependent(this._oViewSettingsDialog);
 				// forward compact/cozy style into Dialog
 				this._oViewSettingsDialog.addStyleClass(this.getOwnerComponent().getContentDensityClass());
 			}
+
 			this._oViewSettingsDialog.setModel(soModel, "SalesOrderUpdateModel");
 			this._oViewSettingsDialog.setModel(soStatusModel, "SalesOrderUpdateUsrStatusModel");
-			this._oViewSettingsDialog.open();
-			
-		
-			
 
+			this._oViewSettingsDialog.open();
 		},
 		_getSalesOrderUpdateData: function(orderNo) {
 
@@ -252,6 +244,8 @@ sap.ui.define([
 			var oModel = this.getView().getModel();
 			// var oView = this.getView();
 			var that = this;
+			var approvalButtonType = this._oApprovalButton;
+
 			oModel.read("/SalesOrderUpdateSet('" + orderNo + "')/SalesOrderUpdate_USR_STSet", {
 				success: function(oData, oResponse) {
 					var soupdateJSON = new sap.ui.model.json.JSONModel();
@@ -263,24 +257,57 @@ sap.ui.define([
 							elem.Active = true;
 						}
 
+						if (approvalButtonType && approvalButtonType === "Approve") {
+							// Inital status default unchecked
+							if (elem.Status === "Z001") {
+								elem.Active = false;
+								elem.CheckBoxEnabled = true;
+							}
+							// Released to Billing default checked but editable.
+							if (elem.Status === "Z010") {
+								elem.Active = true;
+								elem.CheckBoxEnabled = true;
+							}
+							// Cancelled default uncheck not editable
+							if (elem.Status === "Z012") {
+								elem.Active = false;
+								elem.CheckBoxEnabled = false;
+							}
+							// Rev Recog default not editable
+							if (elem.Status === "Z011") {
+								// elem.Active = true;
+								elem.CheckBoxEnabled = false;
+							}
+						} else if (approvalButtonType && approvalButtonType === "Put on Hold") {
+							// Released to Billing default unchecked but uneditable.
+							if (elem.Status === "Z010") {
+								elem.Active = false;
+								elem.CheckBoxEnabled = false;
+							}
+							// Inital status default checked
+							if (elem.Status === "Z001") {
+								elem.Active = true;
+								// elem.CheckBoxEnabled = false;
+							}
+						}
 					});
 
 					soupdateJSON.setData(oData);
 
 					that.setModel(soupdateJSON, "SalesOrderUpdateUsrStatusModel");
+					that._openApprovalDialogAfterRead();
 
 				},
 				error: function(data) {
-					sap.m.MessageToast.show("Error while approving:" + data);
+					sap.m.MessageToast.show("Error while reading:" + data);
 				}
 			});
 
 		},
 		onBillingApprovalDialogSubmit: function() {
-			// console.log(this.getView().byId("_comment"));
-			
-			
-			
+
+			//sap.ui.core.Fragment.byId("myFrag", "myControl")
+
 			var soUpdateModel = this._oViewSettingsDialog.getModel("SalesOrderUpdateModel");
 			var soupdateUsrStatusModel = this._oViewSettingsDialog.getModel("SalesOrderUpdateUsrStatusModel");
 
@@ -288,38 +315,55 @@ sap.ui.define([
 			var payload = {};
 			payload.OrderNo = this.getView().getBindingContext().getProperty("OrderNo");
 			payload.Comment = soUpdateModel.getData().Comment;
-			if(this._oApprovalButton === "Approve"){
-				payload.Status = "A";	
-			}else if(this._oApprovalButton === "Reject"){
+			if (this._oApprovalButton === "Approve") {
+				payload.Status = "A";
+			} else if (this._oApprovalButton === "Put on Hold") {
 				payload.Status = "R";
-				if( payload.Comment === "" || payload.Comment.trim().length === 0 ){
-					
-					sap.m.MessageToast.show("Please provide comments for rejection.");
-					return;
-				}
+				// if (payload.Comment === "" || payload.Comment.trim().length === 0) {
+
+				// 	sap.m.MessageToast.show("Please provide comments for rejection.");
+				// 	return;
+				// }
 			}
-			
 
 			var usrStatusJson = JSON.stringify(this.transformUsrStatusPayload(soupdateUsrStatusModel));
-
 			payload.UsrStatus = usrStatusJson;
+			// console.log(soupdateUsrStatusModel);
+			// console.log(usrStatusJson);
+			var that = this;
 
-			
 			oModel.create("/SalesOrderUpdateSet", payload, null, {
 				success: function() {
-					this._oViewSettingsDialog.close();
 					sap.m.MessageToast.show("Approved");
-					
+					that._oViewSettingsDialog.close();
+					oModel.refresh();
+
 				},
 				error: function(data) {
-					sap.m.MessageToast.show("Error while approving:" + data);
+					sap.m.MessageBox.show(
+						"There was an error during Sales Order operation", {
+							id: "soUpdateError",
+							icon: sap.m.MessageBox.Icon.ERROR,
+							title: "Error occurred during the Sales Order operation",
+							details: data, 
+							styleClass: this.getOwnerComponent().getContentDensityClass(),
+							actions: [sap.m.MessageBox.Action.CLOSE]
+						}
+					);
 				}
 			});
 
 		},
-		onBillingApprovalDialogClose : function(){
-				this._oViewSettingsDialog.close();
+		onBillingApprovalDialogClose: function() {
+
+			this._oViewSettingsDialog.close();
 		},
+
+		afterClose: function() {
+			this._oViewSettingsDialog.destroy(true);
+			this._oViewSettingsDialog = undefined;
+		},
+
 		onCheckBoxSelect: function(elem) {
 
 		},
@@ -328,13 +372,12 @@ sap.ui.define([
 			var data = soupdateUsrStatusModel.getData().results;
 			for (var i in data) {
 				SalesOrderUpdate_USR_STSet.push({
-					"OrderNo": data[i].OrderNo,
+					"ORDER_NO": data[i].ORDER_NO,
+					"USR_STAT": data[i].USR_STAT,
 					"Objnr": data[i].Objnr,
-					"UsrStat": data[i].UsrStat,
 					"Status": data[i].Status,
 					"StatusTxt": data[i].StatusTxt,
 					"Active": data[i].Active
-					
 
 				});
 

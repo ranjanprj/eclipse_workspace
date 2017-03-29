@@ -1,9 +1,9 @@
 import json
 import sqlite3
 
-conn = sqlite3.connect("yelpdb")
 
 
+conn = sqlite3.connect("D://yelpdb.db")
 create_sql = """
 
 CREATE TABLE yelp_checkin_info( 

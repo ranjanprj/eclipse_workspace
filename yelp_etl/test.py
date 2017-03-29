@@ -92,11 +92,11 @@ parking_valet boolean,
 
 """
 import json
-
-with open("D:\\DATA_DUMP\\yelp_dataset_challenge_academic_dataset\\yelp_academic_dataset_business.json","r") as f:
-    d = json.loads(f.readline())    
-    for k,v in d['attributes'].items():
-        print('"' + k + '",')
+# 
+# with open("D:\\DATA_DUMP\\yelp_dataset_challenge_academic_dataset\\yelp_academic_dataset_business.json","r") as f:
+#     d = json.loads(f.readline())    
+#     for k,v in d['attributes'].items():
+#         print('"' + k + '",')
 simple_att = [
 "Take-out",
 "Drive-Thru",
@@ -117,16 +117,27 @@ simple_att = [
 "Price Range"
 ]     
 
-with open("D:\\DATA_DUMP\\yelp_dataset_challenge_academic_dataset\\yelp_academic_dataset_business.json","r") as f:
-    
-        d = json.loads(f.readline())
-        sql_val= []   
-        business_id = d["business_id"]    
+# with open("D:\\DATA_DUMP\\yelp_dataset_challenge_academic_dataset\\yelp_academic_dataset_business.json","r") as f:
+#     
+#         d = json.loads(f.readline())
+#         sql_val= []   
+#         business_id = d["business_id"]    
+#         
+#         sql_val.append(business_id)
+#         for i in simple_att:
+#             sql_val.append(d["attributes"][i])
+#         print(sql_val)
+# 
+# 
+# print("""{0},{1}""".format(*[1,2]))
+
+
+
+with open("D:\\DATA_DUMP\\yelp_dataset_challenge_academic_dataset\\yelp_academic_dataset_user.json","r") as f:
+    for line in f:
+        d = json.loads(line)
+        key_list = ['profile', 'cute', 'funny', 'plain', 'writer', 'note', 'photos', 'hot', 'cool', 'more']
         
-        sql_val.append(business_id)
-        for i in simple_att:
-            sql_val.append(d["attributes"][i])
-        print(sql_val)
-
-
-print("""{0},{1}""".format(*[1,2]))
+        l = [d['compliments'][key] if key in d['compliments'] else 0 for key in key_list ]
+        print(len(l))
+        

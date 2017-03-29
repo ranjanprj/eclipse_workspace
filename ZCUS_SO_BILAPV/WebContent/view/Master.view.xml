@@ -30,9 +30,9 @@
 						</attributes>
 						<secondStatus>
 						<ObjectStatus
-							text="{Status}"
+							text="{StatusDesc}"
 							state="{
-								path: 'Status',
+								path: 'StatusDesc',
 								formatter: '.formatter.statusState'
 							}" />
 						</secondStatus>
