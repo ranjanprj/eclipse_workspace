@@ -19,6 +19,7 @@ sap.ui.define([
 			this._oModel = oComponent.getModel();
 			this._bMessageOpen = false;
 			this._sErrorText = this._oResourceBundle.getText("errorText");
+			this._soErrorText=this._oResourceBundle.getText("soErrorText");
 			this._sErrorTitle = this._oResourceBundle.getText("errorTitle");
 			this._oModel.attachMetadataFailed(function(oEvent) {
 				var oParams = oEvent.getParameters();
@@ -64,7 +65,7 @@ sap.ui.define([
 		 * @param {string} sDetails a technical error to be displayed on request
 		 * @private
 		 */
-		_showServiceError: function(sDetails) {
+		_showServiceErrorOld: function(sDetails) {
 			if (this._bMessageOpen) {
 				return;
 			}
@@ -73,7 +74,7 @@ sap.ui.define([
 				this._sErrorText, {
 					id: "serviceErrorMessageBox",
 					icon: MessageBox.Icon.ERROR,
-					title: this._sErrorTitle,
+					title: this._sErrorTitle + " haha ",
 					details: sDetails,
 					styleClass: this._oComponent.getContentDensityClass(),
 					actions: [MessageBox.Action.CLOSE],
@@ -82,7 +83,31 @@ sap.ui.define([
 					}.bind(this)
 				}
 			);
+		},
+		_showServiceError: function(sDetails) {
+			if (this._bMessageOpen) {
+				return;
+			}
+		
+			var sDetailsObj = JSON.parse(sDetails.responseText);
+			var errorMsg = sDetailsObj.error.message.value;
+			var transactionId = "Please mention the following while reporting this error Transaction Id :" + sDetailsObj.error.innererror.transactionid;
+			this._bMessageOpen = true;
+			MessageBox.show(
+				this._sErrorText, {
+					id: "serviceErrorMessageBox",
+					icon: MessageBox.Icon.ERROR,
+					title: this._soErrorText,
+					details: errorMsg +  " Technical Details [" + transactionId + "]",
+					styleClass: this._oComponent.getContentDensityClass(),
+					actions: [MessageBox.Action.CLOSE],
+					onClose: function() {
+						this._bMessageOpen = false;
+					}.bind(this)
+				}
+			);
 		}
+		
 	});
 
 });

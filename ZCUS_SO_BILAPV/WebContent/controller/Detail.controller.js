@@ -234,7 +234,7 @@ sap.ui.define([
 
 				},
 				error: function(data) {
-					sap.m.MessageToast.show("Error while approving:" + data);
+					sap.m.MessageToast.show("Error while fetching data:" + data);
 				}
 			});
 
@@ -289,6 +289,11 @@ sap.ui.define([
 								elem.Active = true;
 								// elem.CheckBoxEnabled = false;
 							}
+							// Cancelled default uncheck not editable
+							if (elem.Status === "Z012") {
+								elem.Active = false;
+								elem.CheckBoxEnabled = false;
+							}
 						}
 					});
 
@@ -332,24 +337,17 @@ sap.ui.define([
 			// console.log(usrStatusJson);
 			var that = this;
 
-			oModel.create("/SalesOrderUpdateSet", payload, null, {
+			oModel.create("/SalesOrderUpdateSet", payload, {
 				success: function() {
-					sap.m.MessageToast.show("Approved");
+					sap.m.MessageToast.show("Sales Order Approved");
 					that._oViewSettingsDialog.close();
 					oModel.refresh();
 
 				},
 				error: function(data) {
-					sap.m.MessageBox.show(
-						"There was an error during Sales Order operation", {
-							id: "soUpdateError",
-							icon: sap.m.MessageBox.Icon.ERROR,
-							title: "Error occurred during the Sales Order operation",
-							details: data, 
-							styleClass: this.getOwnerComponent().getContentDensityClass(),
-							actions: [sap.m.MessageBox.Action.CLOSE]
-						}
-					);
+					sap.m.MessageToast.show("Error processing Sales Order");
+					that._oViewSettingsDialog.close();
+
 				}
 			});
 

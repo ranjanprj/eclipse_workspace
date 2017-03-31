@@ -10,69 +10,72 @@
 import json
 import sqlite3
 
-conn = sqlite3.connect("D://yelpdb.db")
+def load_data(conn):
 
-######################################
-create_sql = """
-create table yelp_review(
-user_id text,
-review_id text,
-stars int,
-date datetime,
-review_text text
-);
-"""
-
-drop_sql = """
-drop table if exists yelp_review;
-"""
-
-insert_sql = """
-    insert into yelp_review values('{}','{}',{},'{}','{}');
-"""
-
-c = conn.cursor()
-c.execute("DROP TABLE IF EXISTS yelp_review;")
-c.execute(create_sql)
-conn.commit()
-###########################################
-create_sql = """
-create table yelp_review_votes(
-user_id text,
-review_id text,
-funny int,
-useful int,
-cool int
-);
-"""
-
-drop_sql = """
-drop table if exists yelp_review_votes;
-"""
-
-votes_insert_sql = """
-    insert into yelp_review_votes values('{}','{}',{},{},{});
-"""
-
-c = conn.cursor()
-c.execute("DROP TABLE IF EXISTS yelp_review_votes;")
-c.execute(create_sql)
-conn.commit()
-##############
-
-
-
-with open("D:\\DATA_DUMP\\yelp_dataset_challenge_academic_dataset\\yelp_academic_dataset_review.json","r") as f:
-    for line in f:
-        d = json.loads(line)
-        sql = insert_sql.format(d['user_id'],d['review_id'],d['stars'],d['date'],d['text'].replace("'","''"))
-        c.execute(sql)
-        
-                
-        sql = votes_insert_sql.format(d['user_id'],d['review_id'],d['votes']['funny'],d['votes']['useful'],d['votes']['cool'])
-        c.execute(sql)
-
-       
-conn.commit()
-conn.close()
-
+    ######################################
+    create_sql = """
+    create table yelp_review(
+    review_user_id text,
+    review_id text,
+    review_stars int,
+    review_date date,
+    review_text text,
+    review_business_id text
+    );
+    """
+    
+    drop_sql = """
+    drop table if exists yelp_review;
+    """
+    
+    insert_sql = """
+        insert into yelp_review values('{}','{}',{},'{}','{}','{}');
+    """
+    
+    c = conn.cursor()
+    c.execute("DROP TABLE IF EXISTS yelp_review;")
+    c.execute(create_sql)
+    conn.commit()
+    ###########################################
+    create_sql = """
+    create table yelp_review_votes(
+    review_user_id text,
+    review_id text,
+    review_funny int,
+    review_useful int,
+    review_cool int
+    );
+    """
+    
+    drop_sql = """
+    drop table if exists yelp_review_votes;
+    """
+    
+    votes_insert_sql = """
+        insert into yelp_review_votes values('{}','{}',{},{},{});
+    """
+    
+    c = conn.cursor()
+    c.execute("DROP TABLE IF EXISTS yelp_review_votes;")
+    c.execute(create_sql)
+    conn.commit()
+    ##############
+    
+    
+    
+    with open("D:\\DATA_DUMP\\yelp_dataset_challenge_academic_dataset\\yelp_academic_dataset_review.json","r") as f,open("D://yelp.sql","a") as sql_file:
+        for line in f:
+            d = json.loads(line)
+            sql = insert_sql.format(d['user_id'],d['review_id'],d['stars'],d['date'],d['text'].replace("'","''"),d['business_id'])
+            c.execute(sql)
+            
+                    
+            sql = votes_insert_sql.format(d['user_id'],d['review_id'],d['votes']['funny'],d['votes']['useful'],d['votes']['cool'])
+            c.execute(sql)
+    
+           
+    conn.commit()
+    conn.close()
+if __name__ == "__main__":
+    conn = sqlite3.connect("D://yelpdb.db")
+    load_data(conn)

@@ -46,7 +46,7 @@ import sqlite3
 
 
 
-def load_business_data(conn):
+def load_data(conn):
     drop_sql = """
     drop table if exists yelp_business;
     """
@@ -54,16 +54,16 @@ def load_business_data(conn):
     create_sql = """
     CREATE TABLE yelp_business(
     business_id text,
-    full_address text,
-    open bool,
-    city text,
-    review_count int,
-    name text,
-    longitude float,
-    state text,
-    stars int,
-    latitude float,
-    type text
+    business_full_address text,
+    business_open bool,
+    business_city text,
+    business_review_count int,
+    business_name text,
+    business_longitude float,
+    business_state text,
+    business_stars int,
+    business_latitude float,
+    business_type text
     );
     
     """
@@ -89,12 +89,12 @@ def load_business_data(conn):
     c.execute(create_sql)
     conn.commit()
     
-    with open("D:\\DATA_DUMP\\yelp_dataset_challenge_academic_dataset\\yelp_academic_dataset_business.json","r") as f:
+    with open("D:\\DATA_DUMP\\yelp_dataset_challenge_academic_dataset\\yelp_academic_dataset_business.json","r") as f,open("D://yelp.sql","a") as sql_file:
     #     pass
-        for line in f.readlines():
+        for line in f:
             d = json.loads(line)
     #         print(d["open"])
-            is_open =  1 if  str(d["open"]) is "True"  else 0
+            is_open =  True if  str(d["open"]) is "True"  else False
     #         print(is_open)
             sql = insert_sql.format(
                 d["business_id"],
@@ -111,7 +111,7 @@ def load_business_data(conn):
             )
     #         print(sql)
             c.execute(sql)    
-    
+    conn.commit()
     ################################################################################################################################
     ################################################################################################################################
     ################################################################################################################################
@@ -123,9 +123,9 @@ def load_business_data(conn):
     create_sql = """
     CREATE TABLE yelp_business_hours(
     business_id text,
-    day_of_week text,
-    open datetime,
-    close datetime
+    business_day_of_week text,
+    business_open time,
+    business_close time
     );
     
     """
@@ -145,15 +145,16 @@ def load_business_data(conn):
     c.execute(create_sql)
     conn.commit()
               
-    with open("D:\\DATA_DUMP\\yelp_dataset_challenge_academic_dataset\\yelp_academic_dataset_business.json","r") as f:
+    with open("D:\\DATA_DUMP\\yelp_dataset_challenge_academic_dataset\\yelp_academic_dataset_business.json","r") as f,open("D://yelp.sql","a") as sql_file:
     #     pass
-        for line in f.readlines():
+        for line in f:
             d = json.loads(line)   
             business_id = d["business_id"]
             for k,v in d["hours"].items():            
                 sql = insert_sql.format(business_id,k,v['open'],v['close'])
-                c.execute(sql)            
-     
+                c.execute(sql)    
+                        
+    conn.commit()
     
     ################################################################################################################################
     ################################################################################################################################
@@ -166,7 +167,7 @@ def load_business_data(conn):
     create_sql = """
     CREATE TABLE yelp_business_categories(
     business_id text,
-    category text
+    business_category text
     );
     
     """
@@ -184,9 +185,9 @@ def load_business_data(conn):
     c.execute(create_sql)
     conn.commit()
               
-    with open("D:\\DATA_DUMP\\yelp_dataset_challenge_academic_dataset\\yelp_academic_dataset_business.json","r") as f:
+    with open("D:\\DATA_DUMP\\yelp_dataset_challenge_academic_dataset\\yelp_academic_dataset_business.json","r") as f,open("D://yelp.sql","a") as sql_file:
     #     pass
-        for line in f.readlines():
+        for line in f:
           
             d = json.loads(line)   
             business_id = d["business_id"]       
@@ -195,9 +196,10 @@ def load_business_data(conn):
                 
                 sql = insert_sql.format(business_id,i.replace("'","''"))
                 c.execute(sql)
+              
             
          
-    
+    conn.commit()
     ################################################################################################################################
     ################################################################################################################################
     ################################################################################################################################
@@ -209,7 +211,7 @@ def load_business_data(conn):
     create_sql = """
     CREATE TABLE yelp_business_neighborhoods(
     business_id text,
-    neighborhoods text
+    business_neighborhoods text
     );
     
     """
@@ -227,9 +229,9 @@ def load_business_data(conn):
     c.execute(create_sql)
     conn.commit()
               
-    with open("D:\\DATA_DUMP\\yelp_dataset_challenge_academic_dataset\\yelp_academic_dataset_business.json","r") as f:
+    with open("D:\\DATA_DUMP\\yelp_dataset_challenge_academic_dataset\\yelp_academic_dataset_business.json","r") as f,open("D://yelp.sql","a") as sql_file:
     #     pass
-        for line in f.readlines():
+        for line in f:
       
             d = json.loads(line)   
             business_id = d["business_id"]       
@@ -239,7 +241,7 @@ def load_business_data(conn):
                 c.execute(sql)
             
          
-         
+    conn.commit()     
     ################################################################################################################################
     ################################################################################################################################
     ################################################################################################################################
@@ -263,55 +265,55 @@ def load_business_data(conn):
     CREATE TABLE yelp_business_attributes(
     
     business_id text,
-    take_out bool,
-    drive_thru bool,
-    caters bool,
+    business_take_out bool,
+    business_drive_thru bool,
+    business_caters bool,
     
-    noise_level text,
-    takes_reservations bool,
-    delivery bool,
-    has_tv bool,
+    business_noise_level text,
+    business_takes_reservations bool,
+    business_delivery bool,
+    business_has_tv bool,
     
-    outdoor_seating bool,
-    attire text,
-    alcohol text,
-    waiter_service bool,
+    business_outdoor_seating bool,
+    business_attire text,
+    business_alcohol text,
+    business_waiter_service bool,
     
-    accepts_credit_cards bool,
-    good_for_kids bool,
-    good_for_groups bool,
-    price_range int,
-    
-    
-    
-    
-    good_for_dessert bool,
-    good_for_latenight bool,
-    good_for_lunch bool,
-    good_for_dinner bool,
-    good_for_brunch bool,
-    good_for_breakfast bool,
+    business_accepts_credit_cards bool,
+    business_good_for_kids bool,
+    business_good_for_groups bool,
+    business_price_range int,
     
     
     
-    ambience_romantic bool,
-    ambience_intimate bool,
-    ambience_classy bool,
-    ambience_hipster bool,
-    ambience_divey bool,
-    ambience_touristy bool,
-    ambience_trendy bool,
-    ambience_upscale bool,
-    ambience_casual bool,
+    
+    business_good_for_dessert bool,
+    business_good_for_latenight bool,
+    business_good_for_lunch bool,
+    business_good_for_dinner bool,
+    business_good_for_brunch bool,
+    business_good_for_breakfast bool,
+    
+    
+    
+    business_ambience_romantic bool,
+    business_ambience_intimate bool,
+    business_ambience_classy bool,
+    business_ambience_hipster bool,
+    business_ambience_divey bool,
+    business_ambience_touristy bool,
+    business_ambience_trendy bool,
+    business_ambience_upscale bool,
+    business_ambience_casual bool,
     
     
     
         
-    parking_garage bool,
-    parking_street bool,
-    parking_validated bool,
-    parking_lot bool,
-    parking_valet bool
+    business_parking_garage bool,
+    business_parking_street bool,
+    business_parking_validated bool,
+    business_parking_lot bool,
+    business_parking_valet bool
     
     );
     
@@ -397,8 +399,8 @@ def load_business_data(conn):
     "Price Range"
     ]     
     
-    with open("D:\\DATA_DUMP\\yelp_dataset_challenge_academic_dataset\\yelp_academic_dataset_business.json","r") as f:
-        for line in f.readlines():
+    with open("D:\\DATA_DUMP\\yelp_dataset_challenge_academic_dataset\\yelp_academic_dataset_business.json","r") as f,open("D://yelp.sql","a") as sql_file:
+        for line in f:
             d = json.loads(line)
           
             sql_val= []   
@@ -459,9 +461,9 @@ def load_business_data(conn):
                    
                         
                     if isinstance(i, bool) and str(i) is "True" :
-                        new_sql_val.append(1)
+                        new_sql_val.append(True)
                     elif isinstance(i, bool) and str(i) is "False":
-                        new_sql_val.append(0)
+                        new_sql_val.append(False)
                     else:
                         new_sql_val.append(i)
     #             print(new_sql_val)
@@ -475,10 +477,11 @@ def load_business_data(conn):
     ###################################################################################################
     
     conn.commit()
+    
     conn.close()
         
 
 
 if __name__ == "__main__":
     conn = sqlite3.connect("D://yelpdb.db")
-    load_business_data(conn)
+    load_data(conn)
