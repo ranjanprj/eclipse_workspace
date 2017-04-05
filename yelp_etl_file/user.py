@@ -32,9 +32,11 @@
 
 import json
 import sqlite3
+import codecs
+sql_file = codecs.open("D://yelp_data.sql", 'a', encoding='utf8')
 
 def load_data(conn):
-    
+    sql_set = []
     create_sql = """
     create table yelp_user(
     user_yelping_since date, 
@@ -72,9 +74,9 @@ def load_data(conn):
                 key.append(d['compliments'])
             
             sql = insert_sql.format(d['yelping_since']+"-01",d['review_count'],d['name'].replace("'","''"),d['user_id'],d['fans'],d['average_stars'],d['type'])
-            c.execute(sql)
-    
-    print("yelp user insert done")        
+           
+            sql_file.write(sql)
+            
     conn.commit()
     print(key_len)
     print(key)
@@ -109,8 +111,8 @@ def load_data(conn):
             d = json.loads(line)
             for friend in d['friends']:            
                 sql = insert_sql.format(d['user_id'],friend)
-                c.execute(sql)
-    print("yelp_user_friends done")        
+                sql_file.write(sql)
+            
     conn.commit()
     
     
@@ -145,7 +147,7 @@ def load_data(conn):
             d = json.loads(line)
             for elite in d['elite']:            
                 sql = insert_sql.format(d['user_id'],elite)
-            c.execute(sql)
+                sql_file.write(sql)
             
     conn.commit()
     
@@ -195,10 +197,11 @@ def load_data(conn):
             key_list = ['profile', 'cute', 'funny', 'plain', 'writer','list', 'note', 'photos', 'hot', 'cool', 'more']
             l = [d['compliments'][key] if key in d['compliments'] else 0 for key in key_list ]
             sql = insert_sql.format(d['user_id'],*l)
-            c.execute(sql)
-            
+            sql_file.write(sql)
+    
+           
     conn.commit()
-    print("user compliements done")
+    
     ##############################
     #   VOTES
     ############################
@@ -230,10 +233,11 @@ def load_data(conn):
         for line in f:
             d = json.loads(line)   
             sql = votes_insert_sql.format(d['user_id'],d['review_id'],d['votes']['funny'],d['votes']['useful'],d['votes']['cool'])
-            c.execute(sql)
+            sql_file.write(sql)
     
            
     conn.commit()
+    
 
     conn.close()
 

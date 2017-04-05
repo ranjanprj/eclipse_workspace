@@ -36,7 +36,6 @@ def load_tip():
 def get_conn():
     try:
         conn = psycopg2.connect("dbname='postgres' user='postgres' host='localhost' password='postgres'")
-        conn.autocommit = True
         return conn
 
     except Exception as e:
@@ -63,5 +62,6 @@ if __name__ == '__main__':
     load_checkin()
     load_business()
     load_tip()
-#    load_review()
-#    load_user()
+    load_review()
+    load_user()
+   

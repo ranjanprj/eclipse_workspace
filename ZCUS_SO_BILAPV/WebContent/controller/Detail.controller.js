@@ -336,13 +336,12 @@ sap.ui.define([
 			// console.log(soupdateUsrStatusModel);
 			// console.log(usrStatusJson);
 			var that = this;
-
+			var successMsg = payload.Status === "A" ? "Sales Order Approved" : "Sales Order Put on Hold";
 			oModel.create("/SalesOrderUpdateSet", payload, {
 				success: function() {
-					sap.m.MessageToast.show("Sales Order Approved");
+					sap.m.MessageToast.show(successMsg);
 					that._oViewSettingsDialog.close();
 					oModel.refresh();
-
 				},
 				error: function(data) {
 					sap.m.MessageToast.show("Error processing Sales Order");

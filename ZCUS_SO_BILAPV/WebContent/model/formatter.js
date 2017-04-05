@@ -44,6 +44,14 @@ sap.ui.define([], function() {
 			};
 			return (value && map[value]) ? map[value] : false;
 		},
+		// Negative negative condition if true then button enabled is false.
+		putOnHoldTruthy: function(value) {
+			var map = {
+				"true": false,
+				"false" : true
+			};
+			return (value && map[value]) ? map[value] : true;
+		},
 
 		date: function(value) {
 			if (value) {

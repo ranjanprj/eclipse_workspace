@@ -88,7 +88,7 @@ sap.ui.define([
 			if (this._bMessageOpen) {
 				return;
 			}
-		
+			
 			var sDetailsObj = JSON.parse(sDetails.responseText);
 			var errorMsg = sDetailsObj.error.message.value;
 			var transactionId = "Please mention the following while reporting this error Transaction Id :" + sDetailsObj.error.innererror.transactionid;

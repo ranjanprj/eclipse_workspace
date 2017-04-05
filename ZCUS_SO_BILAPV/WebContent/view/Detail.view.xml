@@ -7,7 +7,7 @@
 					<Label text="{i18n>salesOrg} : {SalesOrg}." width="100%" id="sales_org_label"/>
 					<Label text="{i18n>subSegment} : {SubSegment}" width="100%" id="sub_segment_label"/>
 					<Label text="{i18n>rig} : {RigDesc}" width="100%" id="rig_segment_label"/>
-					<Label text="{i18n>distChannel} : {DistChannel}" width="100%" id="dist_channel_label"/>
+					<Label text="{i18n>distChannel} : {DisDesc}" width="100%" id="dist_channel_label"/>
 					<!--<Label text="{i18n>customerSales} : {SoldToParty}" width="100%" id="customer_sales_label"/>-->
 						<Label text="{i18n>createdOn} : { path : 'CreatedOn', formatter: '.formatter.date'}" width="100%" id="created_on_label"/>
 					<Label text="{i18n>well} : {WellDesc}" width="100%" id="well_label"/>
@@ -24,7 +24,7 @@
 					<Label text="{i18n>soldToParty} : {SoldToParty}" width="100%" id="sold_to_party_label"/>
 					<Label text="{i18n>discount} : {Discount}" width="100%" id="discount_label"/>
 					<Label text="{i18n>segment} : {Segment}" width="100%" id="segment_label"/>
-					<Label text="{i18n>poNumber} : {PoNumber}" width="100%" id="po_number_label"/>
+					<Label text="{i18n>poNumber} : {PoNumber}" width="100%" id="po_number_label"/>					
 				</sap.ui.layout:content>
 			</sap.ui.layout:Grid>
 			<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
@@ -84,7 +84,7 @@
 				<ToolbarSpacer/>
 				
 				<Button id="acceptButton" type="Accept" text="{i18n>approveBtnTxt}" press="openApproveDialog"/>
-				<Button id="putOnHoldButton" type="Reject" text="{i18n>putOnHoldBtnTxt}" press="openApproveDialog"/>
+				<Button id="putOnHoldButton" type="Reject" text="{i18n>putOnHoldBtnTxt}" press="openApproveDialog" enabled="{= ${OnHold} === 'false' }"/>
 				<!--<Button id="shareButton" tooltip="{i18n>shareTooltip}" icon="sap-icon://action" press="onSharePress">-->
 				<!--	<dependents>-->
 				<!--		<ActionSheet id="shareSheet" showCancelButton="true" placement="Top">-->
