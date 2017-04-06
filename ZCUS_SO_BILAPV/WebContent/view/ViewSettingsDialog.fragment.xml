@@ -3,61 +3,61 @@
 		<filterItems>
 			<ViewSettingsFilterItem id="masterFilterSalesOrgFilter" text="{i18n>masterFilterSalesOrg}" key="SALES_ORG_KEY" multiSelect="true" items="{/SalesOrgSet}">
 				<items>
-					<ViewSettingsItem text="{SalesOrgId}" key="{SalesOrgId}" />
+					<ViewSettingsItem text="{SalesOrgId} - {Description}" key="{SalesOrgId}" />
 				</items>
 			</ViewSettingsFilterItem>
 			
 			<ViewSettingsFilterItem id="masterFilterDistributionChannel" text="{i18n>masterFilterDistributionChannel}" key="DIST_CHANNEL_KEY" multiSelect="true" items="{/DistributionChannelSet}">
 				<items>
-					<ViewSettingsItem text="{DisChannel}" key="{DisChannel}" />
+					<ViewSettingsItem text="{DisChannel} - {Description}" key="{DisChannel}" />
 				</items>
 			</ViewSettingsFilterItem>
 			
 			<ViewSettingsFilterItem id="masterFilterDivision" text="{i18n>masterFilterDivision}" key="DIV_KEY" multiSelect="true" items="{/DivisionSet}">
 				<items>
-					<ViewSettingsItem text="{DivisionId}" key="{DivisionId}" />
+					<ViewSettingsItem text="{DivisionId} - {Description}" key="{DivisionId}" />
 				</items>
 			</ViewSettingsFilterItem>
 			
 			<ViewSettingsFilterItem id="masterFilterDocument" text="{i18n>masterFilterDocument}" key="DOC_TYPE_KEY" multiSelect="true" items="{/DocTypeSet}">
 				<items>
-					<ViewSettingsItem text="{OrderType}" key="{OrderType}" />
+					<ViewSettingsItem text="{OrderType} - {Description}" key="{OrderType}" />
 				</items>
 			</ViewSettingsFilterItem>
 				
 			<ViewSettingsFilterItem id="masterFilterJobProject" text="{i18n>masterFilterJobProject}" key="JOB_PRJ_KEY" multiSelect="true" items="{/JobIdSet}">
 				<items>
-					<ViewSettingsItem text="{JobId}" key="{JobId}" />
+					<ViewSettingsItem text="{JobId} - {Description}" key="{JobId}" />
 				</items>
 			</ViewSettingsFilterItem>
 			
 			<ViewSettingsFilterItem id="masterFilterCustomer" text="{i18n>masterFilterCustomer}" key="CUST_SOLD_TO_KEY" multiSelect="true" items="{/SoldToPartySet}">
 				<items>
-					<ViewSettingsItem text="{Name}" key="{Name}" />
+					<ViewSettingsItem text="{Name} - {Description}" key="{Name}" />
 				</items>
 			</ViewSettingsFilterItem>
 			
 			<ViewSettingsFilterItem id="masterFilterWell" text="{i18n>masterFilterWell}" key="WELL_KEY" multiSelect="true" items="{/WellSet}">
 				<items>
-					<ViewSettingsItem text="{WellId}" key="{WellId}" />
+					<ViewSettingsItem text="{WellId} - {Description}" key="{WellId}" />
 				</items>
 			</ViewSettingsFilterItem>
 		
 			<ViewSettingsFilterItem id="masterFilterRig" text="{i18n>masterFilterRig}" key="RIG_KEY"  multiSelect="true" items="{/RigSet}">
 				<items>
-					<ViewSettingsItem text="{RigId}" key="{RigId}" />
+					<ViewSettingsItem text="{RigId} - {Description}" key="{RigId}" />
 				</items>
 			</ViewSettingsFilterItem>
 			
 			<ViewSettingsFilterItem id="masterFilterSegment" text="{i18n>masterFilterSegment}" key="SEG_KEY"  multiSelect="true" items="{/SegmentSet}">
 				<items>
-					<ViewSettingsItem text="{SegmentId}" key="{SegmentId}" />
+					<ViewSettingsItem text="{SegmentId} - {Description}" key="{SegmentId}" />
 				</items>
 			</ViewSettingsFilterItem>
 			
 			<ViewSettingsFilterItem id="masterFilterSubSegment" text="{i18n>masterFilterSubSegment}" key="SUB_SEG_KEY"  multiSelect="true" items="{/SubSegmentSet}">
 				<items>
-					<ViewSettingsItem text="{SubSegmentId}" key="{SubSegmentId}" />
+					<ViewSettingsItem text="{SubSegmentId} - {Description}" key="{SubSegmentId}" />
 				</items>
 			</ViewSettingsFilterItem>
 			

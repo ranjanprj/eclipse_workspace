@@ -142,27 +142,7 @@ sap.ui.define([
 			this._applyGroupSort([new Sorter(sKey, false)]);
 		},
 
-		/**
-		 * Event handler for the grouper selection.
-		 * @param {sap.ui.base.Event} oEvent the search field event
-		 * @public
-		 */
-		onGroup: function(oEvent) {
-			var sKey = oEvent.getSource().getSelectedItem().getKey();
-			var aSorters = [];
 
-			if (sKey === "NetValue") {
-				// Grouping means sorting so we set the select to the same Entity used for grouping
-				this.getModel("masterView").setProperty("/sortBy", "NetValue");
-
-				aSorters.push(
-					new Sorter("NetValue", false,
-						grouper[sKey].bind(oEvent.getSource()))
-				);
-			}
-
-			this._applyGroupSort(aSorters);
-		},
 
 		/**
 		 * Event handler for the filter button to open the ViewSettingsDialog.
@@ -376,13 +356,7 @@ sap.ui.define([
 			}
 		},
 
-		/**
-		 * Internal helper method to apply both group and sort state together on the list binding
-		 * @private
-		 */
-		_applyGroupSort: function(aSorters) {
-			this._oList.getBinding("items").sort(aSorters);
-		},
+
 
 		/**
 		 * Internal helper method that sets the filter bar visibility property and the label's caption to be shown

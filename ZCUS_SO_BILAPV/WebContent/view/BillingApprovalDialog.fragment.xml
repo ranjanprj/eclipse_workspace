@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
-	<Dialog title="Approve the sales order submitted by {SalesOrderUpdateModel>/OdrCreatedBy}" id="billingApprovalDialog" afterClose="afterClose">
+	<Dialog title="{i18n>approvalDialogTitle} {SalesOrderUpdateModel>/OdrCreatedBy}" id="billingApprovalDialog" afterClose="afterClose">
 		<content>
 			
 			<l:Grid  content="{SalesOrderUpdateUsrStatusModel>/results}" defaultSpan="L6 M6 S6" vSpacing="2" hSpacing="2" width="600px">

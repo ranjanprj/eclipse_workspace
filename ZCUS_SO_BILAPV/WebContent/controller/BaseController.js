@@ -5,7 +5,7 @@ sap.ui.define([
 ], function(Controller, History) {
 	"use strict";
 
-	return Controller.extend("com.slb.cus.billingapproval.BaseController", {
+	return Controller.extend("com.slb.cus.billingapproval.controller.BaseController", {
 		/**
 		 * Convenience method for accessing the router in every controller of the application.
 		 * @public

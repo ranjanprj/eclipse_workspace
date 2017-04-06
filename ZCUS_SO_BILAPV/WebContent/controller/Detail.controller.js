@@ -30,42 +30,7 @@ sap.ui.define([
 		/* =========================================================== */
 		/* event handlers                                              */
 		/* =========================================================== */
-		/**
-		 * Event handler when the share button has been clicked
-		 * @param {sap.ui.base.Event} oEvent the butten press event
-		 * @public
-		 */
-		onSharePress: function() {
-			var oShareSheet = this.byId("shareSheet");
-			oShareSheet.addStyleClass(this.getOwnerComponent().getContentDensityClass());
-			oShareSheet.openBy(this.byId("shareButton"));
-		},
-		/**
-		 * Event handler when the share by E-Mail button has been clicked
-		 * @public
-		 */
-		onShareEmailPress: function() {
-			var oViewModel = this.getModel("detailView");
-			sap.m.URLHelper.triggerEmail(null, oViewModel.getProperty("/shareSendEmailSubject"), oViewModel.getProperty(
-				"/shareSendEmailMessage"));
-		},
-		/**
-		 * Event handler when the share in JAM button has been clicked
-		 * @public
-		 */
-		onShareInJamPress: function() {
-			var oViewModel = this.getModel("detailView"),
-				oShareDialog = sap.ui.getCore().createComponent({
-					name: "sap.collaboration.components.fiori.sharing.dialog",
-					settings: {
-						object: {
-							id: location.href,
-							share: oViewModel.getProperty("/shareOnJamTitle")
-						}
-					}
-				});
-			oShareDialog.open();
-		},
+
 		/**
 		 * Updates the item count within the line item table's header
 		 * @param {object} oEvent an event containing the total number of items in the list
@@ -337,14 +302,20 @@ sap.ui.define([
 			// console.log(usrStatusJson);
 			var that = this;
 			var successMsg = payload.Status === "A" ? "Sales Order Approved" : "Sales Order Put on Hold";
+			
 			oModel.create("/SalesOrderUpdateSet", payload, {
 				success: function() {
 					sap.m.MessageToast.show(successMsg);
 					that._oViewSettingsDialog.close();
-					oModel.refresh();
+					try{
+						oModel.refresh();
+					}catch(ex){
+						console.log("Error while refreshing component model",ex);
+					}
+
 				},
 				error: function(data) {
-					sap.m.MessageToast.show("Error processing Sales Order");
+//					sap.m.MessageToast.show("Error processing Sales Order");
 					that._oViewSettingsDialog.close();
 
 				}

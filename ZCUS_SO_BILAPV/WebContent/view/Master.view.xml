@@ -43,17 +43,10 @@
 		<footer>
 			<OverflowToolbar id="footerbar">
 				<ToolbarSpacer/>
-				<!--<Select id="sort-select" type="IconOnly" icon="sap-icon://sort" autoAdjustWidth="true" selectedKey="{masterView>/sortBy}" change="onSort">-->
-				<!--	<core:Item id="masterSort1" key="OrderNo" text="{i18n>masterSort1}"/>-->
-				<!--	<core:Item id="masterSort2" key="NetValue" text="{i18n>masterSort2}"/>-->
-				<!--</Select>-->
+				
 				<OverflowToolbarButton text="{i18n>masterListFilterButtonOverflowText}" id="filter-button" icon="sap-icon://filter"
 					press="onOpenViewSettings"/>
-				<!--<Select id="group-select" type="IconOnly" icon="sap-icon://group-2" autoAdjustWidth="true" selectedKey="{masterView>/groupBy}"-->
-				<!--	change="onGroup">-->
-				<!--	<core:Item id="masterGroupNone" key="None" text="{i18n>masterGroupNone}"/>-->
-				<!--	<core:Item id="masterGroup1" key="NetValue" text="{i18n>masterGroup1}"/>-->
-				<!--</Select>-->
+				
 			</OverflowToolbar>
 		</footer>
 	</Page>
